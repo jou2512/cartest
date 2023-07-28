@@ -134,6 +134,7 @@ def scrape_data(brand: str, model: str, build_year: int, engine_hp: str):
         },
     }
 
+
 @app.get("/createjson/")
 def scrape_data():
     url = "https://www.olsx.lu/en/chiptuning"
