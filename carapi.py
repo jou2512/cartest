@@ -33,7 +33,7 @@ async def get_manufacturers(types: str = None):
                        "type-trucks", "type-jetski", "type-others"]
 
     # Split the types parameter into a list of individual types
-    selected_types = types.split(",") if types else []
+    selected_types = types.split(",") if types else available_types
 
     # Check if the provided types are valid
     invalid_types = [

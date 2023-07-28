@@ -1,1 +1,1 @@
-web: gunicorn -w 2 -k uvicorn.workers.UvicornWorker carpi:app
+web: gunicorn -w 2 -k uvicorn.workers.UvicornWorker carapi:app
