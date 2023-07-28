@@ -101,7 +101,7 @@ def scrape_data(brand: str, model: str, build_year: int, engine_hp: str):
     print(brand, model, build_year, engine_hp)
 
     # Create the URL with the encoded variables
-    url = f"https://www.olsx.lu/en/chiptuning/{format_name(brand)}/{format_name(model)}/{format_name(build_year)}/{formate_name(engine_hp)}"
+    url = f"https://www.olsx.lu/en/chiptuning/{format_name(brand)}/{format_name(model)}/{format_name(build_year)}/{format_name(engine_hp)}"
 
     # Send a GET request to the URL and parse the HTML content
     response = requests.get(url)
