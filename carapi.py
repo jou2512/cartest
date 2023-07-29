@@ -9,7 +9,7 @@ app = FastAPI()
 
 def format_name(name):
     # Remove special characters like "&" and connect words with hyphens
-    name = re.sub(r"[^a-zA-Z0-9- ]", "", name)
+    name = re.sub(r"[^a-zA-Z0-9- .]", "", name)
     return "-".join(format_engine(name).lower().split())
 
 
@@ -74,7 +74,7 @@ async def get_build_years(brand: str, model: str):
         return {"success": False, "message": "Failed to fetch data from the website."}
 
     soup = BeautifulSoup(response.content, "html.parser")
-    build_years = [format_name(year.find("span", class_="version").text)
+    build_years = [format_name(year.find("span", class_="version").text+" "+year.find("span", class_="model").text)
                    for year in soup.select("ul.row.models.versions li")]
     return {"success": True, "build_years": build_years}
 
@@ -96,7 +96,7 @@ async def get_engines(brand: str, model: str, build_year: str):
 
 
 @app.get("/scrape/")
-def scrape_data(brand: str, model: str, build_year: int, engine_hp: str):
+def scrape_data(brand: str, model: str, build_year: str, engine_hp: str):
 
     print(brand, model, build_year, engine_hp)
 
