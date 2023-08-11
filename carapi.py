@@ -74,8 +74,18 @@ async def get_build_years(brand: str, model: str):
         return {"success": False, "message": "Failed to fetch data from the website."}
 
     soup = BeautifulSoup(response.content, "html.parser")
-    build_years = [format_name(year.find("span", class_="version").text+" "+year.find("span", class_="model").text)
-                   for year in soup.select("ul.row.models.versions li")]
+    build_years = []
+    for year in soup.select("ul.row.models.versions li"):
+        version_span = year.find("span", class_="version")
+        model_span = year.find("span", class_="model")
+
+        version_text = version_span.text if version_span else ""
+        model_text = model_span.text if model_span else ""
+
+        build_years.append(format_name(version_text + " " + model_text))
+
+    # Now you have the 'build_years' list with properly formatted entries
+
     return {"success": True, "build_years": build_years}
 
 
